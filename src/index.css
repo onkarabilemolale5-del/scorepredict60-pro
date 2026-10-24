@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@layer base {
+  html, body {
+    background-color: #070b13;
+    color: #f3f4f6;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  /* Monospace numbers for trading tickers to prevent layout jitter */
+  input, select, .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+}
