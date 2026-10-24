@@ -35,25 +35,26 @@ export const LiveMatchesSection: React.FC<LiveMatchesSectionProps> = ({
   const [countdown, setCountdown] = useState<number>(30);
   const [isAutoRefreshActive, setIsAutoRefreshActive] = useState<boolean>(true);
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
-  const [expandedMatchId, setExpandedMatchId] = useState<string | null>(liveFixtures[0]?.id || null);
+  const [expandedMatchId, setExpandedMatchId] = useState<string | null>(null);
 
-  // 1. Auto-refresh every 30 seconds when there are LIVE fixtures
+  // 1. Auto-refresh every 30 seconds when there are LIVE fixtures (pure countdown timer)
   useEffect(() => {
     if (!isAutoRefreshActive || liveFixtures.length === 0) return;
 
     const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          // Trigger silent background refresh
-          onManualRefresh();
-          return 30;
-        }
-        return prev - 1;
-      });
+      setCountdown((prev) => (prev <= 1 ? 0 : prev - 1));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isAutoRefreshActive, liveFixtures.length, onManualRefresh]);
+  }, [isAutoRefreshActive, liveFixtures.length]);
+
+  // When countdown hits 0, execute refresh and reset countdown outside of the render/updater cycle
+  useEffect(() => {
+    if (countdown === 0) {
+      setCountdown(30);
+      onManualRefresh();
+    }
+  }, [countdown, onManualRefresh]);
 
   if (liveFixtures.length === 0) {
     return null;
