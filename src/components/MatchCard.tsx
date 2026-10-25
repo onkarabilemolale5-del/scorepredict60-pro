@@ -56,6 +56,9 @@ export const MatchCard: React.FC<MatchCardProps> = ({
     homeLineup,
     awayLineup,
   } = fixture;
+    const [forceFT, setForceFT] = useState(false);
+  const effectiveStatus = forceFT ? 'FT' : status;
+  const isLive = status === 'LIVE';
 
   const gaboroneTime = formatGaboroneTime(utcDate);
   const gaboroneDate = formatGaboroneDate(utcDate);
