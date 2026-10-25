@@ -121,7 +121,8 @@ export const MatchCard: React.FC<MatchCardProps> = ({
               <span className="w-2 h-2 rounded-full bg-rose-400"></span>
               LIVE {fixture.liveMinute ? `${fixture.liveMinute}'` : fixture.statusShort || 'IN PLAY'}
             </span>
-          )}{status === 'LIVE' && <button onClick={()=>setForceFT(!forceFT)} className="ml-2 text-[10px] bg-yellow-500 text-black px-2 py-0.5 rounded">{forceFT ? 'Undo' : 'Force FT'}</button>}
+          )}
+          {status === 'LIVE' && <button onClick={()=>setForceFT(!forceFT)} className="ml-2 text-[10px] bg-yellow-500 text-black px-2 py-0.5 rounded">{forceFT ? 'Undo' : 'Force FT'}</button>}
         </div>
       </div>
 
