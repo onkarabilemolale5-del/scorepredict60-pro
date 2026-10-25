@@ -58,7 +58,7 @@ export const MatchCard: React.FC<MatchCardProps> = ({
   } = fixture;
     const [forceFT, setForceFT] = useState(false);
   const effectiveStatus = forceFT ? 'FT' : status;
-  const isLive = status === 'LIVE';
+  const isLive = effectiveStatus === 'LIVE';
 
   const gaboroneTime = formatGaboroneTime(utcDate);
   const gaboroneDate = formatGaboroneDate(utcDate);
@@ -116,12 +116,12 @@ export const MatchCard: React.FC<MatchCardProps> = ({
             {gaboroneTime}
           </span>
 
-          {status === 'LIVE' && (
+          {status === {isLIVE && (
             <span className="bg-rose-950 text-rose-300 border border-rose-500/80 px-2.5 py-0.5 rounded-full text-[10.5px] font-black font-mono flex items-center gap-1.5 animate-pulse shadow-sm shadow-rose-950">
               <span className="w-2 h-2 rounded-full bg-rose-400"></span>
               LIVE {fixture.liveMinute ? `${fixture.liveMinute}'` : fixture.statusShort || 'IN PLAY'}
             </span>
-          )}
+          )}{status === 'LIVE' && <button onClick={()=>setForceFT(!forceFT)} className="ml-2 text-[10px] bg-yellow-500 text-black px-2 py-0.5 rounded">{forceFT ? 'Undo' : 'Force FT'}</button>}
         </div>
       </div>
 
@@ -183,7 +183,7 @@ export const MatchCard: React.FC<MatchCardProps> = ({
             </div>
 
             {/* LIVE Score & Goals Display */}
-            {status === 'LIVE' && (
+            {status === {isLIVE && (
               <div className="mt-2 p-2.5 rounded-xl bg-gradient-to-r from-emerald-950/60 to-[#0e1b26] border border-emerald-500/50 space-y-1.5 shadow-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1">
